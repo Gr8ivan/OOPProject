@@ -12,7 +12,7 @@ public class Planet extends Visual {
     float smoothingFactor = 0.3f; // Adjust this value to control the smoothness (0 < smoothingFactor <= 1)
     float maxPulseSize = 0.3f; // Adjust this value to control the maximum increase in size due to pulsing
     float starDistance = 300;
-    int numStars = 10;
+    int numStars = 15;
     float[] starSizes;
     float[] starSpeeds;
     float[] starAngles;
@@ -59,7 +59,7 @@ public class Planet extends Visual {
         }
 
         // Create star texture
-        starsTexture = createStarsTexture(2048, 2048, 1000);
+        starsTexture = createStarsTexture(2048, 2048, 1500);
         starsSphere = createStarsSphere(1600, 30, starsTexture);
     }
 
@@ -75,10 +75,15 @@ public class Planet extends Visual {
         smoothedBass = smoothingFactor * bass + (1 - smoothingFactor) * smoothedBass;
         float pulsingSize = planetSize + smoothedBass;
     
+        // Change planet color based on time
+        float r = map(sin(millis() * 0.0005f), -1, 1, 0, 255);
+        float g = map(sin(millis() * 0.0006f), -1, 1, 0, 255);
+        float b = map(sin(millis() * 0.0007f), -1, 1, 0, 255);
+    
         // Draw the pulsing planet
         pushMatrix();
         translate(width / 2, height / 2);
-        fill(255, 180, 0);
+        fill(r, g, b);
         lights();
         sphereDetail(120);
         sphere(pulsingSize);
@@ -122,18 +127,6 @@ public class Planet extends Visual {
     
         popMatrix();
         
-        // Draw starry background
-        pushMatrix();
-        translate(width/2, height/2, -500);
-        fill(255);
-        for (int i = 0; i < 1000; i++) {
-            float x = random(-width, width);
-            float y = random(-height, height);
-            float z = random(0, 1000);
-            float size = random(1, 3);
-            ellipse(x, y, size, size);
-        }
-        popMatrix();
     }
 
     public PImage createStarsTexture(int w, int h, int numStars) {
