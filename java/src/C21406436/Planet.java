@@ -1,5 +1,7 @@
-package ie.tudublin;
+package C21406436;
 
+import ie.tudublin.Visual;
+import ie.tudublin.VisualException;
 import processing.core.PApplet;
 
 public class Planet extends Visual {
