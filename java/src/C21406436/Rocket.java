@@ -42,7 +42,7 @@ public class Rocket extends Visual {
         int planetColor = color(127 * sin(radians(planetColorAngle)) + 128,
                 127 * sin(radians(planetColorAngle + 120)) + 128, 127 * sin(radians(planetColorAngle + 240)) + 128);
         float planetSizeOffset = 10 * sin(radians(planetSizeAngle));
-        drawPlanet(200, 100, 80 + planetSizeOffset, planetColor);
+        drawPlanet(300, 100, 80 + planetSizeOffset, planetColor);
 
         // Update floatX and floatY with Perlin noise values
         float floatX = map(noise(time), 0, 1, -width / 2, width / 2);
@@ -99,7 +99,7 @@ public class Rocket extends Visual {
 
     public void drawSpaceship() {
         fill(0, 0, 255); // Set the spaceship color using HSB values
-
+        
         // Body of the spaceship
         beginShape();
         vertex(0, -20);
@@ -121,12 +121,13 @@ public class Rocket extends Visual {
         vertex(20, 10);
         endShape(CLOSE);
 
-        // Engine flame
-        fill(30, 255, 255); // Set the engine flame color using HSB values
-        beginShape();
-        vertex(-5, 10);
-        vertex(5, 10);
-        vertex(0, 25);
-        endShape(CLOSE);
+       // Engine trail
+       float engineTrailSize = 10 + 5 * sin(radians(millis() / 5));
+       fill(255, 225, 180);
+       for (int i = 0; i < 10; i++) {
+           float engineTrailOffset = 10 + 5 * i;
+           ellipse(0, 10 + engineTrailOffset, engineTrailSize, engineTrailSize);
+       }
     }
+
 }
