@@ -10,6 +10,7 @@ public class Rocket extends Visual {
     float floatAngle = 0;
     float planetColorAngle = 0;
     float planetSizeAngle = 0;
+    float time = 0;
     ArrayList<PVector> trailPositions = new ArrayList<>();
     int trailLength = 50;
 
@@ -18,7 +19,7 @@ public class Rocket extends Visual {
     }
 
     public void setup() {
-        //colorMode(HSB);
+        colorMode(HSB); // Set the color mode to HSB
         noStroke();
         startMinim();
 
@@ -43,8 +44,9 @@ public class Rocket extends Visual {
         float planetSizeOffset = 10 * sin(radians(planetSizeAngle));
         drawPlanet(200, 100, 80 + planetSizeOffset, planetColor);
 
-        float floatX = sin(radians(floatAngle)) * 10;
-        float floatY = cos(radians(floatAngle)) * 10;
+        // Update floatX and floatY with Perlin noise values
+        float floatX = map(noise(time), 0, 1, -width / 2, width / 2);
+        float floatY = map(noise(time + 10000), 0, 1, -height / 2, height / 2);
 
         translate(width / 2, height / 2);
         translate(floatX, floatY);
@@ -53,6 +55,7 @@ public class Rocket extends Visual {
         floatAngle += 0.5;
         planetColorAngle += 0.5;
         planetSizeAngle += 1;
+        time += 0.001; // Increment time value for Perlin noise
     }
 
     public void drawStars(int numStars) {
@@ -65,12 +68,37 @@ public class Rocket extends Visual {
     }
 
     public void drawPlanet(float x, float y, float size, int planetColor) {
-        fill(planetColor);
-        ellipse(x, y, size, size);
+        pushMatrix();
+        translate(x, y);
+        noStroke();
+
+        // Draw the planet with shading
+        for (int i = 0; i < 360; i += 10) {
+            float angle = radians(i);
+            float xOff = cos(angle) * size / 2;
+            float yOff = sin(angle) * size / 2;
+            int shade = color(hue(planetColor), saturation(planetColor), brightness(planetColor) * (1 - (i / 360.0f)));
+            fill(shade);
+            ellipse(xOff, yOff, size, size);
+        }
+
+        // Draw a textured overlay
+        for (int i = 0; i < 50; i++) {
+            float xPos = random(-size / 2, size / 2);
+            float yPos = random(-size / 2, size / 2);
+            float craterSize = random(3, 8);
+            float brightnessOffset = random(-20, 20);
+            int textureColor = color(hue(planetColor), saturation(planetColor),
+                    brightness(planetColor) + brightnessOffset);
+            fill(textureColor);
+            ellipse(xPos, yPos, craterSize, craterSize);
+        }
+
+        popMatrix();
     }
 
     public void drawSpaceship() {
-        fill(255);
+        fill(0, 0, 255); // Set the spaceship color using HSB values
 
         // Body of the spaceship
         beginShape();
@@ -94,7 +122,7 @@ public class Rocket extends Visual {
         endShape(CLOSE);
 
         // Engine flame
-        fill(255, 140, 0);
+        fill(30, 255, 255); // Set the engine flame color using HSB values
         beginShape();
         vertex(-5, 10);
         vertex(5, 10);
