@@ -5,6 +5,7 @@ import ie.tudublin.VisualException;
 import processing.core.PApplet;
 
 public class Planet extends Visual {
+    
     float planetSize = 100;
     float smoothedBass = 0;
     float smoothingFactor = 0.3f; // Adjust this value to control the smoothness (0 < smoothingFactor <= 1)
