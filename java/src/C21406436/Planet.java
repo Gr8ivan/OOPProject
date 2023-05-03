@@ -27,9 +27,6 @@ public class Planet extends Visual {
     PImage starsTexture;
 
     Rocket rocket;
-    Planet planet;
-    PApplet parent;
-    
     
 
     public void settings() {
@@ -48,8 +45,6 @@ public class Planet extends Visual {
 
         
         
-
-
         
         initializeStars();
         starsTexture = createStarsTexture(2048, 2048, 1500);
@@ -57,15 +52,17 @@ public class Planet extends Visual {
     }
     int mode = 0;
 
+    long musicStartTime = 0;
+
     public void keyPressed() {
         if (key == ' ' && !started) {
             started = true;
-            getAudioPlayer().cue(0);
-            getAudioPlayer().play();
+            musicStartTime = millis();
         } else if (key >= '0' && key <= '9') {
             mode = key - '0';
         }
     }
+
     
 
     private void initializeStars() {
@@ -154,8 +151,8 @@ public class Planet extends Visual {
         float speed = 10;
         int trailLength;
 
-        Star(float x, float y, float speed, int trailLength) {
-            this.position = new PVector(x, y);
+        Star(PVector position, float speed, int trailLength) {
+            this.position = position;
             this.speed = speed;
             this.trailLength = trailLength;
         }
@@ -247,6 +244,11 @@ public class Planet extends Visual {
             fill(255);
             text("Press Space to Start", width / 2, height / 2);
         } else {
+            if (musicStartTime != 0 && millis() - musicStartTime >= 2000 && !getAudioPlayer().isPlaying()) {
+                getAudioPlayer().cue(0);
+                getAudioPlayer().play();
+                musicStartTime = 0;
+            }    
             background(0);
             try {
                 calculateFFT();
