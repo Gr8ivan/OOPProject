@@ -1,6 +1,7 @@
 package C21406436;
 
 import ie.tudublin.Visual;
+import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
@@ -19,9 +20,10 @@ public class Rocket extends Visual {
 
     float planetSpeed = 0.2f;
 
+
     class Star {
         PVector position;
-        float speed;
+        float speed = 10;
         int trailLength;
 
         Star(float x, float y, float speed, int trailLength) {
@@ -67,11 +69,13 @@ public class Rocket extends Visual {
             getAudioPlayer().play();
         }
     }
+   
 
     public void draw() {
         background(0);
     
-        drawStars(100);
+        drawStars(10);
+        
 
         for (Star star : stars) {
             star.update();
@@ -81,21 +85,20 @@ public class Rocket extends Visual {
         float planetSize = 80 + 10 * sin(radians(planetSizeAngle));
         float planetColor = color(127 * sin(radians(planetColorAngle)) + 128,
                 127 * sin(radians(planetColorAngle + 120)) + 128, 127 * sin(radians(planetColorAngle + 240)) + 128);
-    
-        // Modify the map() function to use the planetSpeed variable
-        float planetX = map(sin(radians(frameCount * planetSpeed)), -1, 1, -width, width);
-    
-        drawPlanet(planetX, 100, planetSize, (int) planetColor); // Change argument order and cast planetColor to int
-    
+         // Set the planet position to the top left corner
+         float planetX = 100; // Change this value to adjust the X position
+         float planetY = 150; // Change this value to adjust the Y position
+         drawRocketPlanet(planetX, planetY, planetSize, (int) planetColor);
+     
         // Calculate the position of the spaceship moving in a circle
         float spaceshipX = circleRadius * cos(radians(circleAngle));
         float spaceshipY = circleRadius * sin(radians(circleAngle));
     
         translate(width / 2, height / 2);
         translate(spaceshipX, spaceshipY);
-        drawSpaceship();
+        drawRocket();
     
-        circleAngle += 0.2f;
+        circleAngle += 0.4f;
         planetColorAngle += 0.1f;
         planetSizeAngle += 0.5f;
 
@@ -115,13 +118,13 @@ public class Rocket extends Visual {
         }
     }
 
-    public void drawPlanet(float x, float y, float size, int planetColor) {
+    public void drawRocketPlanet(float x, float y, float size, int planetColor) {
         pushMatrix();
         translate(x, y);
         noStroke();
         colorMode(HSB);
         
-        // Draw the planet with shading and gradient
+        // planet with shading and gradient
         for (int i = 0; i < 360; i += 5) {
           float angle = radians(i);
           float xOff = cos(angle) * size / 2;
@@ -132,18 +135,8 @@ public class Rocket extends Visual {
           ellipse(xOff, yOff, size, size);
         }
       
-        // Draw a textured overlay
-        for (int i = 0; i < 50; i++) {
-          float xPos = random(-size / 2, size / 2);
-          float yPos = random(-size / 2, size / 2);
-          float craterSize = random(3, 8);
-          float brightnessOffset = random(-20, 20);
-          int textureColor = color(hue(planetColor), saturation(planetColor), brightness(planetColor) + brightnessOffset, 200);
-          fill(textureColor);
-          ellipse(xPos, yPos, craterSize, craterSize);
-        }
       
-        // Draw a glowing aura around the planet
+        // glowing aura around the planet
         for (int i = 0; i < 10; i++) {
           int glowColor = color(hue(planetColor), 100, 100, 50 - i*5);
           fill(glowColor);
@@ -154,10 +147,10 @@ public class Rocket extends Visual {
       }
       
 
-      public void drawSpaceship() {
-        fill(0, 0, 255); // Set the spaceship color using HSB values
+      public void drawRocket() {
+        fill(0, 0, 255); // Set the rocket color using HSB values
         
-        // Body of the spaceship
+        // Body of the rocket
         beginShape();
         vertex(0, -20);
         vertex(-10, 10);

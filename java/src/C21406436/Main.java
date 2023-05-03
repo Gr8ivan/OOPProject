@@ -1,6 +1,7 @@
 package C21406436;
 
 import C21406436.Planet;
+import C21406436.Rocket;
 import example.CubeVisual;
 import example.MyVisual;
 import example.RotatingAudioBands;
