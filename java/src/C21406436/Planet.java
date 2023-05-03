@@ -1,10 +1,10 @@
 package C21406436;
-
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PShape;
+import processing.core.PVector;
 import processing.core.PGraphics;
 
 public class Planet extends Visual {
@@ -25,18 +25,45 @@ public class Planet extends Visual {
     PShape starsSphere;
     PImage starsTexture;
 
+    Rocket rocket;
+    Planet planet;
+    PApplet parent;
+    
+    
+
     public void settings() {
         size(1024, 500, P3D);
+
     }
 
-    public void setup() {
-        startMinim();
-        loadAudio("cantlie-slowed.mp3");
+    
 
-        colorMode(HSB, 255); // Add this line
+    public void setup() {    
+        colorMode(HSB, 255); 
+        startMinim();
+        
+        loadAudio("cantlie-slowed.mp3"); 
+            
+
+        
+        
+
+
+        
         initializeStars();
         starsTexture = createStarsTexture(2048, 2048, 1500);
         starsSphere = createStarsSphere(1600, 30, starsTexture);
+    }
+    int mode = 0;
+
+    public void keyPressed() {
+        if (key == ' ') {
+            getAudioPlayer().cue(0);
+            getAudioPlayer().play();
+        }            
+        else if (key >= '0' && key <= '9') {
+                mode = key - '0';
+        }
     }
 
     private void initializeStars() {
@@ -119,6 +146,20 @@ public class Planet extends Visual {
     
         popMatrix();
     }
+
+    class Star {
+        PVector position;
+        float speed = 10;
+        int trailLength;
+
+        Star(float x, float y, float speed, int trailLength) {
+            this.position = new PVector(x, y);
+            this.speed = speed;
+            this.trailLength = trailLength;
+        }
+
+        // Rest of the code remains the same
+    }
     
     public void drawAsteroid(float scaleFactor, float rotationSpeed) {
         pushMatrix();
@@ -178,9 +219,9 @@ public class Planet extends Visual {
         float shockwaveScale = 2f;
         float shockwaveSpacing = 2;
 
-        float r = map(sin(millis() * 0.0005f), -1, 1, 0, 255);
-        float g = map(sin(millis() * 0.0006f), -1, 1, 0, 255);
-        float b = map(sin(millis() * 0.0007f), -1, 1, 0, 255);
+        float r = PApplet.map(PApplet.sin(millis() * 0.0005f), -1, 1, 0, 255);
+        float g = PApplet.map(PApplet.sin(millis() * 0.0006f), -1, 1, 0, 255);
+        float b = PApplet.map(PApplet.sin(millis() * 0.0007f), -1, 1, 0, 255);
 
         pushMatrix();
         translate(width / 2, height / 2);
@@ -196,9 +237,12 @@ public class Planet extends Visual {
         }
         popMatrix();
     }
+
+    
     
     
     public void draw() {
+        
         background(0);
         try {
             calculateFFT();
@@ -208,23 +252,28 @@ public class Planet extends Visual {
         calculateFrequencyBands();
         calculateAverageAmplitude();
 
-        float cameraX = cos(angle) * 500;
-        float cameraY = sin(angle) * 500;
-        float cameraZ = 500;
-        camera(cameraX, cameraY, cameraZ, width / 2, height / 2, 0, 0, 1, 0);
 
-        drawStarryBackground();
-        drawPlanet();
-        drawStars();
-        drawShockwaves();
-
-        angle += 0.01;
-    }
-
-    public void keyPressed() {
-        if (key == ' ') {
-            getAudioPlayer().cue(0);
-            getAudioPlayer().play();
+        switch (mode) {
+			case 0:
+                float cameraX = PApplet.cos(angle) * 500;
+                float cameraY = PApplet.sin(angle) * 500;
+                float cameraZ = 500;
+                camera(cameraX, cameraY, cameraZ, width / 2, height / 2, 0, 0, 1, 0);
+    
+                drawStarryBackground();
+                drawPlanet();
+                drawStars();
+                drawShockwaves();
+    
+                angle += 0.01; 
+                break;           
+            case 1:
+                
+                break;
         }
+
+        
     }
+
+    
 }
