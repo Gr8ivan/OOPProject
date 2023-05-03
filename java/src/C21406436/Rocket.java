@@ -3,15 +3,12 @@ package C21406436;
 import ie.tudublin.Visual;
 import processing.core.PApplet;
 import processing.core.PVector;
+import java.util.Random;
 
 import java.util.ArrayList;
 
 public class Rocket extends Visual {
 
-    float floatAngle = 0;
-    float planetColorAngle = 0;
-    float planetSizeAngle = 0;
-    float time = 0;
     ArrayList<PVector> trailPositions = new ArrayList<>();
     int trailLength = 50;
 
@@ -20,6 +17,36 @@ public class Rocket extends Visual {
 
     float planetSpeed = 0.2f;
 
+    int startTime;
+
+    // Add a new Planet class
+    class Planet {
+        float x;
+        float y;
+        float size;
+        int color;
+        float speed;
+
+        Planet(float x, float y, float size, int color, float speed) {
+            this.x = x;
+            this.y = y;
+            this.size = size;
+            this.color = color;
+            this.speed = speed;
+        }
+
+        void update() {
+            y += speed;
+            if (y > height + size) {
+                y = -size;
+                x = random(width);
+            }
+        }
+
+        void display() {
+            drawRocketPlanet(x, y, size, color);
+        }
+    }
 
     class Star {
         PVector position;
@@ -49,6 +76,7 @@ public class Rocket extends Visual {
     }
 
     ArrayList<Star> stars = new ArrayList<>();
+    ArrayList<Planet> planets = new ArrayList<>();
 
     public void settings() {
         size(1024, 500, P3D);
@@ -61,6 +89,9 @@ public class Rocket extends Visual {
 
         // Call loadAudio to load an audio file to process
         loadAudio("cantlie-slowed.mp3");
+
+        createRandomPlanets(6);
+        startTime = millis();
     }
 
     public void keyPressed() {
@@ -74,22 +105,21 @@ public class Rocket extends Visual {
     public void draw() {
         background(0);
     
-        drawStars(10);
-        
-
+        drawStars(100);
+    
         for (Star star : stars) {
             star.update();
             star.display();
         }
     
-        float planetSize = 200 + 10 * sin(radians(planetSizeAngle));
-        float planetColor = color(127 * sin(radians(planetColorAngle)) + 128,
-                127 * sin(radians(planetColorAngle + 120)) + 128, 127 * sin(radians(planetColorAngle + 240)) + 128);
-         // Set the planet position to the top left corner
-         float planetX = 300; // Change this value to adjust the X position
-         float planetY = 200; // Change this value to adjust the Y position
-         drawRocketPlanet(planetX, planetY, planetSize, (int) planetColor);
-     
+        // Check if the elapsed time is greater than 5 seconds (5000 milliseconds)
+        if (millis() - startTime > 5000) {
+            for (Planet planet : planets) {
+                planet.update();
+                planet.display();
+            }
+        }
+    
         // Calculate the position of the spaceship moving in a circle
         float spaceshipX = circleRadius * cos(radians(circleAngle));
         float spaceshipY = circleRadius * sin(radians(circleAngle));
@@ -99,11 +129,7 @@ public class Rocket extends Visual {
         drawRocket();
     
         circleAngle += 0.4f;
-        planetColorAngle += 0.1f;
-        planetSizeAngle += 0.5f;
-
-       
-    }
+    }    
     
 
     public void drawStars(int numStars) {
@@ -118,33 +144,59 @@ public class Rocket extends Visual {
         }
     }
 
+    public void createRandomPlanets(int numPlanets) {
+        for (int i = 0; i < numPlanets; i++) {
+            float x = random(width);
+            float y = -random(height) * (i + 1); // Multiply the random height value by (i + 1)
+            float size = random(50, 200);
+            int color = color(random(255), random(255), random(255));
+            float speed = random(1, 3);
+            planets.add(new Planet(x, y, size, color, speed));
+        }
+    }
+    
+    
+
     public void drawRocketPlanet(float x, float y, float size, int planetColor) {
         pushMatrix();
         translate(x, y);
         noStroke();
-        colorMode(HSB);
-        
-        // planet with shading and gradient
+    
         for (int i = 0; i < 360; i += 5) {
-          float angle = radians(i);
-          float xOff = cos(angle) * size / 2;
-          float yOff = sin(angle) * size / 2;
-          float distance = dist(xOff, yOff, 0, 0);
-          int shade = color(hue(planetColor), map(distance, 0, size/2, 0, 100), brightness(planetColor) * (1 - (i / 360.0f)));
-          fill(shade);
-          ellipse(xOff, yOff, size, size);
+            float angle = radians(i);
+            float angleNext = radians(i + 5);
+    
+            float x1 = cos(angle) * size / 2;
+            float y1 = sin(angle) * size / 2;
+            float x2 = cos(angleNext) * size / 2;
+            float y2 = sin(angleNext) * size / 2;
+    
+            float distance1 = dist(x1, y1, 0, 0);
+            float distance2 = dist(x2, y2, 0, 0);
+    
+            int shade1 = color(hue(planetColor), map(distance1, 0, size / 2, 0, 100), brightness(planetColor) * (1 - (i / 360.0f)));
+            int shade2 = color(hue(planetColor), map(distance2, 0, size / 2, 0, 100), brightness(planetColor) * (1 - ((i + 5) / 360.0f)));
+    
+            beginShape();
+            fill(shade1);
+            vertex(x1, y1);
+            fill(shade2);
+            vertex(x2, y2);
+            fill(planetColor);
+            vertex(0, 0);
+            endShape(CLOSE);
         }
-      
-      
-        // glowing aura around the planet
+    
+        // Glowing aura around the planet
         for (int i = 0; i < 10; i++) {
-          int glowColor = color(hue(planetColor), 100, 100, 50 - i*5);
-          fill(glowColor);
-          ellipse(0, 0, size + i*10, size + i*10);
+            int glowColor = color(hue(planetColor), 100, 100, 50 - i * 5);
+            fill(glowColor);
+            ellipse(0, 0, size + i * 10, size + i * 10);
         }
-        
+    
         popMatrix();
-      }
+    }
+    
       
 
       public void drawRocket() {
