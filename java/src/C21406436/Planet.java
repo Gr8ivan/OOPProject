@@ -43,7 +43,7 @@ public class Planet extends Visual {
         startMinim();
         
         loadAudio("cantlie-slowed.mp3"); 
-            
+        rocket = new Rocket(this);      
 
         
         
@@ -268,7 +268,7 @@ public class Planet extends Visual {
                 angle += 0.01; 
                 break;           
             case 1:
-                
+                rocket.draw(this);
                 break;
         }
 
