@@ -51,7 +51,7 @@ public class Rocket extends Visual {
     ArrayList<Star> stars = new ArrayList<>();
 
     public void settings() {
-        size(800, 800);
+        size(1024, 500, P3D);
     }
 
     public void setup() {
@@ -82,12 +82,12 @@ public class Rocket extends Visual {
             star.display();
         }
     
-        float planetSize = 80 + 10 * sin(radians(planetSizeAngle));
+        float planetSize = 200 + 10 * sin(radians(planetSizeAngle));
         float planetColor = color(127 * sin(radians(planetColorAngle)) + 128,
                 127 * sin(radians(planetColorAngle + 120)) + 128, 127 * sin(radians(planetColorAngle + 240)) + 128);
          // Set the planet position to the top left corner
-         float planetX = 100; // Change this value to adjust the X position
-         float planetY = 150; // Change this value to adjust the Y position
+         float planetX = 300; // Change this value to adjust the X position
+         float planetY = 200; // Change this value to adjust the Y position
          drawRocketPlanet(planetX, planetY, planetSize, (int) planetColor);
      
         // Calculate the position of the spaceship moving in a circle
