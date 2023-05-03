@@ -10,10 +10,10 @@ import processing.core.PGraphics;
 public class Planet extends Visual {
     float planetSize = 100;
     float smoothedBass = 0;
-    float smoothingFactor = 0.3f; // Adjust this value to control the smoothness (0 < smoothingFactor <= 1)
-    float maxPulseSize = 0.3f; // Adjust this value to control the maximum increase in size due to pulsing
-    float starDistance = 300;
-    int numStars = 100;
+    float smoothingFactor = 0.2f; // Adjust this value to control the smoothness (0 < smoothingFactor <= 1)
+    float maxPulseSize = 0.4f; // Adjust this value to control the maximum increase in size due to pulsing
+    float starDistance =350;
+    int numStars = 200;
     float[] starSizes;
     float[] starSpeeds;
     float[] starAngles;
@@ -21,7 +21,7 @@ public class Planet extends Visual {
     float[][] starPositions;
     float angle = 0;
     int numShockwaves = 10;
-    float shockwaveThickness = 2;
+    float shockwaveThickness = 3;
     PShape starsSphere;
     PImage starsTexture;
 
