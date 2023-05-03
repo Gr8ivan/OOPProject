@@ -242,7 +242,6 @@ public class Planet extends Visual {
     
     
     public void draw() {
-        
         background(0);
         try {
             calculateFFT();
@@ -251,10 +250,9 @@ public class Planet extends Visual {
         }
         calculateFrequencyBands();
         calculateAverageAmplitude();
-
-
+    
         switch (mode) {
-			case 0:
+            case 0:
                 float cameraX = PApplet.cos(angle) * 500;
                 float cameraY = PApplet.sin(angle) * 500;
                 float cameraZ = 500;
@@ -265,15 +263,15 @@ public class Planet extends Visual {
                 drawStars();
                 drawShockwaves();
     
-                angle += 0.01; 
-                break;           
+                angle += 0.01;
+                break;
             case 1:
+                // Reset the camera to its default position for the rocket scene
+                camera(width / 2.0f, height / 2.0f, (height / 2.0f) / tan(PI * 30.0f / 180.0f), width / 2.0f, height / 2.0f, 0, 0, 1, 0);
                 rocket.draw(this);
                 break;
         }
-
-        
-    }
+    }    
 
     
 }
