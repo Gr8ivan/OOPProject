@@ -1,25 +1,60 @@
 # Music Visualiser Project
 
-Name:
+Name - Student Number:
 
-Student Number: 
+Ivan Zenin - C21406436
 
-## Instructions
-- Fork this repository and use it a starter project for your assignment
-- Create a new package named your student number and put all your code in this package.
-- You should start by creating a subclass of ie.tudublin.Visual
-- There is an example visualiser called MyVisual in the example package
-- Check out the WaveForm and AudioBandsVisual for examples of how to call the Processing functions from other classes that are not subclasses of PApplet
 
 # Description of the assignment
 
+Music: Vampire Hearts/Cant Lie Slowed - https://www.youtube.com/watch?v=q5s0vCQ30SA&ab_channel=Enjoyer.
+
+OOPProject Video:
+
+## Ivan's Work
+I worked on Planet.java in the project. The program displays a 3D scene containing a pulsing planet, rotating stars, and shockwaves that reacts to the audio input. The program includes several other methods for drawing the objects in the scene, such as drawPlanet(), drawStars(), drawAsteroid(), and drawShockwaves(). These methods utilize the Processing API to create 3D shapes, apply transformations, and set colors based on the audio input and elapsed time. The createStarsTexture() and createStarsSphere() methods generate the texture and shape for the starry sphere. The initializeStars() method populates the star arrays with random values, calculating initial positions for the stars.
+
+![Planet](images/planet.png)
+
+### How it works
+1. The class Planet extends the Visual class and initializes variables related to the planet, stars, shockwaves, and scenes.
+1. In the settings() method, the sketch size and renderer are defined.
+1. The setup() method initializes the color mode, starts the Minim library, loads the audio file, and sets up the rocket, stars, and starry sphere.
+1. The initializeStars() method populates the star arrays with random values and calculates initial positions for the stars.
+1. The drawPlanet() method calculates the pulsing size based on smoothed bass, sets the planet color, and draws the planet.
+1. The drawStars() method updates star positions and draws the stars.
+1. The drawAsteroid() method draws the asteroid shape.
+1. The createStarsTexture() method generates a random star texture.
+1. The createStarsSphere() method creates a sphere with the star texture.
+1. The drawStarryBackground() method draws the starry sphere in the background.
+1. The drawShockwaves() method calculates the shockwave color, radius, and alpha, and draws the shockwaves around the planet.
+
+### What I am most proud of in the assignment
+Im most proud of the ability of all the methods working together to make such a unique visualization. The end result turned out better than I expected and it was intreseting to learn about the different ways of creating 3D shapes. My favourite method would probably be the asteroids circling around the planet as I believe they appear visually impressive. 
+
+## Name's Work
+
+### How it works
+
+### What I am most proud of in the assignment
+
+## Name's Work
+
+### How it works
+
+### What I am most proud of in the assignment
+
+## Name's Work
+
+### How it works
+
+### What I am most proud of in the assignment
+
 # Instructions
 
-# How it works
+# Bryan put this here to help us with the readme, I will delete this after everyone completed their bits.
 
-# What I am most proud of in the assignment
-
-# Markdown Tutorial
+### Markdown Tutorial
 
 This is *emphasis*
 

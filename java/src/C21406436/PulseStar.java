@@ -8,22 +8,17 @@ public class PulseStar extends Visual {
     float angle = 0;
     float starSize = 50;
 
-    public PulseStar(PApplet parent) 
-    {
+    public PulseStar(PApplet parent) {
         this.parent = parent;
     }
 
-    public void draw(PApplet parent) 
-    {
-
+    public void draw() {
         float[] bands = getSmoothedBands();
 
         // Draw waveforms at the 4 edges of the screen
         parent.stroke(255);
         parent.noFill();
 
-        System.out.println(bands.length);
-        
         for (int i = 0; i < bands.length; i++) {
             // Top
             parent.line(i * (parent.width / (float) bands.length), 0, i * (parent.width / (float) bands.length), bands[i]);
@@ -56,4 +51,3 @@ public class PulseStar extends Visual {
         angle += 0.01;
     }
 }
-
