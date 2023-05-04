@@ -7,7 +7,13 @@ Ivan Zenin - C21406436
 
 # Description of the assignment
 
-Music: Vampire Hearts/Cant Lie Slowed - [https://www.youtube.com/watch?v=q5s0vCQ30SA&ab_channel=Enjoyer.](https://www.youtube.com/watchv=q5s0vCQ30SA&ab_channel=Enjoyer.)
+Music: Vampire Hearts/Cant Lie Slowed - https://www.youtube.com/watch?v=q5s0vCQ30SA&ab_channel=Enjoyer.
+
+OOPProject Video:
+
+## Ivan's Work ##
+
+
 
 # Instructions
 
