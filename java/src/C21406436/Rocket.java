@@ -8,13 +8,8 @@ import java.util.ArrayList;
 
 public class Rocket extends Visual {
 
-    ArrayList<PVector> trailPositions = new ArrayList<>();
-    int trailLength = 50;
-
-    float circleRadius = 200;
+    int circleRadius = 200;
     float circleAngle = 0;
-
-    float planetSpeed = 0.2f;
 
     int startTime;
     PApplet parent;
@@ -25,8 +20,10 @@ public class Rocket extends Visual {
     this.parent = parent;
 
     }
-    
 
+    ArrayList<Star> stars = new ArrayList<>();
+    ArrayList<Planet> planets = new ArrayList<>();
+    
 
     // Add a new Planet class
     class Planet {
@@ -46,9 +43,9 @@ public class Rocket extends Visual {
 
         void update() {
             y += speed;
-            if (y > 1180) {
+            if (y > parent.height + 100) {
                 y = -size;
-                x = random(1920);
+                x = random(parent.width);
             }
         }
 
@@ -70,9 +67,9 @@ public class Rocket extends Visual {
 
         void update() {
             position.y += speed;
-            if (position.y > 1080) {
+            if (position.y > parent.height) {
                 position.y = 0;
-                position.x = random(1920);
+                position.x = random(parent.width);
             }
         }
 
@@ -82,25 +79,12 @@ public class Rocket extends Visual {
                 parent.ellipse(position.x, position.y - i * speed, 1, 1);
             }
         }
-    }
-
-    ArrayList<Star> stars = new ArrayList<>();
-    ArrayList<Planet> planets = new ArrayList<>();
-
-
-    public void settings() {
-        size(1024, 500, P3D);
-
-    }
-
-    
+    } 
 
     public void setup() {
         
         
-        // Call loadAudio to load an audio file to process
-        
-        drawStars(120, parent);
+        drawStars(120);
         createRandomPlanets(8);
 
         startTime = parent.millis();
@@ -141,7 +125,7 @@ public class Rocket extends Visual {
     }    
     
 
-    public void drawStars(int numStars, PApplet parent) {
+    public void drawStars(int numStars) {
         if (stars.size() < numStars) {
             for (int i = stars.size(); i < numStars; i++) {
                 float x = parent.random(parent.width);
