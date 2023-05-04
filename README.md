@@ -5,6 +5,7 @@ Name - Student Number:
 Ivan Zenin - C21406436
 
 Eric O'Brien - C21750829
+Yasser Alshimmary - D21127124
 
 
 # Description of the assignment
@@ -51,11 +52,25 @@ I worked on the Rocket.java in the project. My inspiration for this idea was old
 ### What I am most proud of in the assignment
 I'm mainly proud of the rocketship with the thruster behind it pulsating. It was a difficult but enjoyable experience but I was delighted how it turned out. It gave me a nostalgic feeling of a pixel art style ship. I'm also really proud of the teamwork that was done here and how all of our ideas came as one.
 
-## Name's Work
+## Yasser's Work
+In the beginning, I start work on a scene to add it to our project, after that we face a problem, how can we switch between scenes, the planet scenes and rocket scenes. The goal was to allow users to transition between two classes, Rocket class and planet class, while the song is playing. The planet class is updated by add two function pressed function to use buttons to change between scene and add switch statement to make switch between scenes. also add Rocket object for the rocket scene. And update all functions in class to accept PApplet as parameter. The Rocket class updated to accept a 'PApplet' object as a parameter and updated all function in class to accept PApplet as parameter. 
 
 ### How it works
+_ Add pressed function, to start the project by pressed shift, and switch between class. 
+_ Add switch statement to switch between scenes.
+_Update Visual class by add PApplet parent.
+
+_ Update Planet class:
+	1. Add Rocket object for the rocket scene.
+	2.Update parameters in both drawShockwaves()  and draw() to accept 	PApplet.
+_ Update Rocket:
+	1. Add PApplet project
+	2. Add Rocket  Constructor to accept PApplet parent
+	3.update display(), draw(), drawStars(), and drawRocket(  		functions to accept PApplet parent, also update parameters in each 		functions
+
 
 ### What I am most proud of in the assignment
+The good team work, especially when we lost some code accidentally, and rest the GitHub Repo, the end results of our work and project.  
 
 ## Name's Work
 
