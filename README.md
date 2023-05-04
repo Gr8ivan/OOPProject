@@ -13,7 +13,7 @@ Daniel Phillips - C20421994
 
 # Description of the assignment
 
-Music: Vampire Hearts/Cant Lie Slowed - https://www.youtube.com/watch?v=q5s0vCQ30SA&ab_channel=Enjoyer.
+Music: Vampire Hearts/Cant Lie Slowed: https://www.youtube.com/watch?v=q5s0vCQ30SA&ab_channel=Enjoyer.
 
 OOPProject Video: https://youtu.be/n6voFiEnGtY
 
