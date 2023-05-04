@@ -14,6 +14,27 @@ OOPProject Video:
 ## Ivan's Work
 I worked on Planet.java in the project. The program displays a 3D scene containing a pulsing planet, rotating stars, and shockwaves that reacts to the audio input. The program includes several other methods for drawing the objects in the scene, such as drawPlanet(), drawStars(), drawAsteroid(), and drawShockwaves(). These methods utilize the Processing API to create 3D shapes, apply transformations, and set colors based on the audio input and elapsed time. The createStarsTexture() and createStarsSphere() methods generate the texture and shape for the starry sphere. The initializeStars() method populates the star arrays with random values, calculating initial positions for the stars.
 
+![Planet](images/planet.png)
+
+### How it works
+
+### What I am most proud of in the assignment
+Im most proud of the ability of all the methods working together to make such a unique visualization. The end result turned out better than I expected and it was intreseting to learn about the different ways of creating 3D shapes. My favourite method would probably be the asteroids circling around the planet as I believe they appear visually impressive. 
+
+## Name's Work
+
+### How it works
+
+### What I am most proud of in the assignment
+
+## Name's Work
+
+### How it works
+
+### What I am most proud of in the assignment
+
+## Name's Work
+
 ### How it works
 
 ### What I am most proud of in the assignment
