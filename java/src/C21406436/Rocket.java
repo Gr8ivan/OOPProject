@@ -3,7 +3,7 @@ This program is a visual simulation that displays a rocket orbiting around the c
 The rocket has a trail of engine fire, and the planets have a glowing aura. 
 Features separate classes for the rocket, Rocketstars, and Rocketplanets, each with their own properties and behavior. 
 The main drawing loop handles updating and displaying all the objects on the canvas.
- */
+*/
 
 
 package C21406436;

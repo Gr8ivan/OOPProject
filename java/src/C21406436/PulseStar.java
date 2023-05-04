@@ -1,6 +1,5 @@
 package C21406436;
 
-import ie.tudublin.Visual;
 import processing.core.*;
 
 public class PulseStar

@@ -1,6 +1,4 @@
 package C21406436;
-import ddf.minim.AudioBuffer;
-import example.AudioBandsVisual;
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
 import processing.core.PApplet;
