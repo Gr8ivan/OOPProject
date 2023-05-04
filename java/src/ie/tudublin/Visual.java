@@ -6,6 +6,7 @@ import ddf.minim.analysis.FFT;
 
 public abstract class Visual extends PApplet
 {
+	protected PApplet parent;
 	private int frameSize = 512;
 	private int sampleRate = 44100;
 

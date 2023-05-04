@@ -5,7 +5,6 @@ import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.*;
-import processing.core.PVector;
 
 public class VisualSetup extends Visual
 {    
@@ -14,8 +13,6 @@ public class VisualSetup extends Visual
     AudioPlayer ap;
     AudioBuffer ab;
     AudioInput ai;
-
-    public PVector center;
 
     float lerpedbuffer[];
 
@@ -26,58 +23,66 @@ public class VisualSetup extends Visual
 
     public void settings()
     {
-        size(1024, 500);
+        size(1920, 1080);
         
         // Use this to make fullscreen
-        //fullScreen();
+        fullScreen();
 
         // Use this to make fullscreen and use P3D for 3D graphics
         //fullScreen(P3D, SPAN); 
     }
 
+    // keyPressed
     public void keyPressed()
     {
+        // choose visual
         if (key >= '1' && key <= '4')
         {
             mode = key - '0';
-        }
-    }
+        }// end if
 
+        // spacebar to pause
+        if (keyCode == ' ')
+        {
+            // if playing
+            if (ap.isPlaying())
+            {
+                ap.pause(); // pause
+
+            }// end if
+            // if paused
+            else
+            {
+                ap.rewind(); // rewind
+                ap.play(); // play     
+
+            }// end else
+        }// end if
+    }// end keyPressed
+
+    // setup
     public void setup()
     {
-        colorMode(RGB);
+        colorMode(HSB);
+        background(0);
 
         minim = new Minim(this);
         startMinim();
-        ap = minim.loadFile("cantlie-slowed.mp3");
+        ap = minim.loadFile("cantlie-slowed.mp3", width);
         ap.play();
         ab = ap.mix;
 
-        //lerpedbuffer = new float[width];
+        lerpedbuffer = new float[width];
 
-        center = new PVector(width/2, height/2);
-
-        part1 = new Part1(width, height, center, this);
-        part2 = new Part2(width, height, center, this);
-                
-        // Call loadAudio to load an audio file to process 
-        loadAudio("cantlie-slowed.mp3");   
-
-        
-        // Call this instead to read audio from the microphone
-        //startListening(); 
-        
-        
+        // declare visuals
+        part1 = new Part1(width, height, lerpedbuffer, this);
+       // part2 = new Part2(width, height, lerpedbuffer, this);
     }
-
-    
 
     public void draw()
     {
-        
         switch (mode) 
         {
-
             case 1:
             {
                 part1.render();

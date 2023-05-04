@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Manager",
+            "request": "launch",
+            "mainClass": "C21406436.Manager",
+            "projectName": "java"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "C21406436.Main",
