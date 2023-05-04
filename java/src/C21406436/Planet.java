@@ -41,7 +41,6 @@ public class Planet extends Visual {
         
         loadAudio("cantlie-slowed.mp3"); 
         rocket = new Rocket(this);      
-
         // Initialize star arrays and generate star positions
         initializeStars();
         starsTexture = createStarsTexture(2048, 2048, 1500); // Create the texture for the starry sphere
@@ -283,6 +282,11 @@ public class Planet extends Visual {
                     // Reset the camera to its default position for the rocket scene
                     camera(width / 2.0f, height / 2.0f, (height / 2.0f) / tan(PI * 30.0f / 180.0f), width / 2.0f, height / 2.0f, 0, 0, 1, 0);
                     rocket.draw(this);
+                    break;
+                case 2:
+                    // Reset the camera to its default position for the rocket scene
+                    camera(width / 2.0f, height / 2.0f, (height / 2.0f) / tan(PI * 30.0f / 180.0f), width / 2.0f, height / 2.0f, 0, 0, 1, 0);
+                    //rocket.draw(this);
                     break;
             }
         }    
