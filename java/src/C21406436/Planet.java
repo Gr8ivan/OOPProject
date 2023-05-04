@@ -1,14 +1,15 @@
 package C21406436;
-
+import ddf.minim.AudioBuffer;
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PShape;
+import processing.core.PVector;
 import processing.core.PGraphics;
 
 public class Planet extends Visual {
-    
+    boolean started = false;
     float planetSize = 100;
     float smoothedBass = 0;
     float smoothingFactor = 0.2f; // Adjust this value to control the smoothness (0 < smoothingFactor <= 1)
@@ -26,19 +27,47 @@ public class Planet extends Visual {
     PShape starsSphere;
     PImage starsTexture;
 
+    // for use in pulse class
+    AudioBuffer ab = getAudioBuffer();
+    float smoothedAmplitude = getSmoothedAmplitude();
+
+    Rocket rocket;
+    Pulse pulse;
+    
+
     public void settings() {
         size(1024, 500, P3D);
+
     }
 
-    public void setup() {
-        startMinim();
-        loadAudio("cantlie-slowed.mp3");
+    
 
-        colorMode(HSB, 255); // Add this line
+    public void setup() {    
+        colorMode(HSB, 255); 
+        startMinim();
+        
+        loadAudio("cantlie-slowed.mp3"); 
+        rocket = new Rocket(this);   
+        pulse = new Pulse(ab, smoothedAmplitude, this);      
+        
         initializeStars();
         starsTexture = createStarsTexture(2048, 2048, 1500);
         starsSphere = createStarsSphere(1600, 30, starsTexture);
     }
+    int mode = 0;
+
+    long musicStartTime = 0;
+
+    public void keyPressed() {
+        if (key == ' ' && !started) {
+            started = true;
+            musicStartTime = millis();
+        } else if (key >= '0' && key <= '9') {
+            mode = key - '0';
+        }
+    }
+
+    
 
     private void initializeStars() {
         starSizes = new float[numStars];
@@ -120,6 +149,18 @@ public class Planet extends Visual {
     
         popMatrix();
     }
+
+    class Star {
+        PVector position;
+        float speed = 10;
+        int trailLength;
+
+        Star(PVector position, float speed, int trailLength) {
+            this.position = position;
+            this.speed = speed;
+            this.trailLength = trailLength;
+        }
+    }
     
     public void drawAsteroid(float scaleFactor, float rotationSpeed) {
         pushMatrix();
@@ -179,9 +220,9 @@ public class Planet extends Visual {
         float shockwaveScale = 2f;
         float shockwaveSpacing = 2;
 
-        float r = map(sin(millis() * 0.0005f), -1, 1, 0, 255);
-        float g = map(sin(millis() * 0.0006f), -1, 1, 0, 255);
-        float b = map(sin(millis() * 0.0007f), -1, 1, 0, 255);
+        float r = PApplet.map(PApplet.sin(millis() * 0.0005f), -1, 1, 0, 255);
+        float g = PApplet.map(PApplet.sin(millis() * 0.0006f), -1, 1, 0, 255);
+        float b = PApplet.map(PApplet.sin(millis() * 0.0007f), -1, 1, 0, 255);
 
         pushMatrix();
         translate(width / 2, height / 2);
@@ -197,35 +238,54 @@ public class Planet extends Visual {
         }
         popMatrix();
     }
-    
+
     
     public void draw() {
-        background(0);
-        try {
-            calculateFFT();
-        } catch (VisualException e) {
-            e.printStackTrace();
-        }
-        calculateFrequencyBands();
-        calculateAverageAmplitude();
-
-        float cameraX = cos(angle) * 500;
-        float cameraY = sin(angle) * 500;
-        float cameraZ = 500;
-        camera(cameraX, cameraY, cameraZ, width / 2, height / 2, 0, 0, 1, 0);
-
-        drawStarryBackground();
-        drawPlanet();
-        drawStars();
-        drawShockwaves();
-
-        angle += 0.01;
+        if (!started) {
+            background(0);
+            textAlign(CENTER, CENTER);
+            textSize(24);
+            fill(255);
+            text("Press Space to Start", width / 2, height / 2);
+        } else {
+            if (musicStartTime != 0 && millis() - musicStartTime >= 2000 && !getAudioPlayer().isPlaying()) {
+                getAudioPlayer().cue(0);
+                getAudioPlayer().play();
+                musicStartTime = 0;
+            }    
+            background(0);
+            try {
+                calculateFFT();
+            } catch (VisualException e) {
+                e.printStackTrace();
+            }
+            calculateFrequencyBands();
+            calculateAverageAmplitude();
+        
+            switch (mode) {
+                case 0:
+                    float cameraX = PApplet.cos(angle) * 500;
+                    float cameraY = PApplet.sin(angle) * 500;
+                    float cameraZ = 500;
+                    camera(cameraX, cameraY, cameraZ, width / 2, height / 2, 0, 0, 1, 0);
+        
+                    drawStarryBackground();
+                    drawPlanet();
+                    drawStars();
+                    drawShockwaves();
+        
+                    angle += 0.01;
+                    break;
+                case 1:
+                    // Reset the camera to its default position for the rocket scene
+                    camera(width / 2.0f, height / 2.0f, (height / 2.0f) / tan(PI * 30.0f / 180.0f), width / 2.0f, height / 2.0f, 0, 0, 1, 0);
+                    rocket.draw(this);
+                    break;
+                case 2:
+                    pulse.draw();
+                    break;
+            }
+        }    
     }
-
-    public void keyPressed() {
-        if (key == ' ') {
-            getAudioPlayer().cue(0);
-            getAudioPlayer().play();
-        }
-    }
+    
 }
