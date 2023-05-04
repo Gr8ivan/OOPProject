@@ -19,9 +19,12 @@ public class Rocket extends Visual {
     int startTime;
     PApplet parent;
 
+    boolean setupCalled = false;
+
     public Rocket(PApplet parent) {
     this.parent = parent;
-}
+
+    }
     
 
 
@@ -43,9 +46,9 @@ public class Rocket extends Visual {
 
         void update() {
             y += speed;
-            if (y > height + size) {
+            if (y > 1180) {
                 y = -size;
-                x = random(width);
+                x = random(1920);
             }
         }
 
@@ -67,9 +70,9 @@ public class Rocket extends Visual {
 
         void update() {
             position.y += speed;
-            if (position.y > height) {
+            if (position.y > 1080) {
                 position.y = 0;
-                position.x = random(width);
+                position.x = random(1920);
             }
         }
 
@@ -93,15 +96,13 @@ public class Rocket extends Visual {
     
 
     public void setup() {
-        colorMode(HSB, 255);
         
-        parent.noStroke();
         
-
         // Call loadAudio to load an audio file to process
         
+        drawStars(120, parent);
+        createRandomPlanets(8);
 
-        createRandomPlanets(6);
         startTime = parent.millis();
     }
 
@@ -110,9 +111,11 @@ public class Rocket extends Visual {
 
     public void draw(PApplet parent) {
         
-    
-        drawStars(100, parent);
-    
+        if (!setupCalled) {
+            setup();
+            setupCalled = true;
+        }
+
         for (Star star : stars) {
             star.update();
             star.display();
