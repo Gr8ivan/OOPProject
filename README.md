@@ -32,11 +32,20 @@ I worked on Planet.java in the project. The program displays a 3D scene containi
 ### What I am most proud of in the assignment
 Im most proud of the ability of all the methods working together to make such a unique visualization. The end result turned out better than I expected and it was intreseting to learn about the different ways of creating 3D shapes. My favourite method would probably be the asteroids circling around the planet as I believe they appear visually impressive. 
 
-## Name's Work
+## Eric's Work
+I worked on the Rocket.java in the project. My inspiration for this idea was old 2d space astroid games, I really want to convey the idea of being on a solo space exploration into deep space. A rocket is shown orbiting the screen's center in a 2D visual simulation made by this application, with stars and planets in the backdrop. The planets have a shimmering halo, while the rocket has a trail of engine fire. There are implemented distinct classes for the rocket, RocketStars, and RocketPlanets, each with their unique set of characteristics. All of the objects on the canvas are updated and displayed by the main drawing loop. Overall the program uses a combination of translation and rotation to create the orbiting effect of the rocket, and employs various drawing techniques to create the visual elements, such as the planet's surface shading and the rocket's engine trail.
 
 ### How it works
+1) A Rocket class is defined, which extends the Visual class.
+2) RocketStar and RocketPlanet inner classes are defined within the Rocket class, representing stars and planets.
+3) The main drawing loop (draw method) updates and displays all objects (stars, planets, and rocket) on the canvas.
+4) The drawStars method creates stars with random positions and speeds.
+5) The createRandomPlanets method generates planets with random positions, sizes, colors, and speeds.
+6) The drawRocketPlanet method draws the planet and its glowing aura.
+7) The drawRocket method renders the rocket and its engine trail.
 
 ### What I am most proud of in the assignment
+I'm mainly proud of the rocketship with the thruster behind it pulsating. It was a difficult but enjoyable experience but I was delighted how it turned out. It gave me a nostalgic feeling of a pixel art style ship. I'm also really proud of the teamwork that was done here and how all of our ideas came as one.
 
 ## Name's Work
 
