@@ -17,6 +17,17 @@ I worked on Planet.java in the project. The program displays a 3D scene containi
 ![Planet](images/planet.png)
 
 ### How it works
+1. The class Planet extends the Visual class and initializes variables related to the planet, stars, shockwaves, and scenes.
+1. In the settings() method, the sketch size and renderer are defined.
+1. The setup() method initializes the color mode, starts the Minim library, loads the audio file, and sets up the rocket, stars, and starry sphere.
+1. The initializeStars() method populates the star arrays with random values and calculates initial positions for the stars.
+1. The drawPlanet() method calculates the pulsing size based on smoothed bass, sets the planet color, and draws the planet.
+1. The drawStars() method updates star positions and draws the stars.
+1. The drawAsteroid() method draws the asteroid shape.
+1. The createStarsTexture() method generates a random star texture.
+1. The createStarsSphere() method creates a sphere with the star texture.
+1. The drawStarryBackground() method draws the starry sphere in the background.
+1. The drawShockwaves() method calculates the shockwave color, radius, and alpha, and draws the shockwaves around the planet.
 
 ### What I am most proud of in the assignment
 Im most proud of the ability of all the methods working together to make such a unique visualization. The end result turned out better than I expected and it was intreseting to learn about the different ways of creating 3D shapes. My favourite method would probably be the asteroids circling around the planet as I believe they appear visually impressive. 
