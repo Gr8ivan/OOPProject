@@ -36,6 +36,7 @@ Im most proud of the ability of all the methods working together to make such a 
 
 ## Eric's Work
 I worked on the Rocket.java in the project. My inspiration for this idea was old 2d space astroid games, I really want to convey the idea of being on a solo space exploration into deep space. A rocket is shown orbiting the screen's center in a 2D visual simulation made by this application, with stars and planets in the backdrop. The planets have a shimmering halo, while the rocket has a trail of engine fire. There are implemented distinct classes for the rocket, RocketStars, and RocketPlanets, each with their unique set of characteristics. All of the objects on the canvas are updated and displayed by the main drawing loop. Overall the program uses a combination of translation and rotation to create the orbiting effect of the rocket, and employs various drawing techniques to create the visual elements, such as the planet's surface shading and the rocket's engine trail.
+
 ![Rocket](images/Rocket.png)
 
 ### How it works
