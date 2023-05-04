@@ -8,22 +8,23 @@ import java.util.ArrayList;
 
 public class Rocket extends Visual {
 
-    ArrayList<PVector> trailPositions = new ArrayList<>();
-    int trailLength = 50;
-
-    float circleRadius = 200;
+    int circleRadius = 200;
     float circleAngle = 0;
-
-    float planetSpeed = 0.2f;
 
     int startTime;
     PApplet parent;
 
-    public Rocket(PApplet parent) 
-    {
-        this.parent = parent;
+    boolean setupCalled = false;
+
+    public Rocket(PApplet parent) {
+    this.parent = parent;
+
     }
+
+    ArrayList<Star> stars = new ArrayList<>();
+    ArrayList<Planet> planets = new ArrayList<>();
     
+
     // Add a new Planet class
     class Planet {
         float x;
@@ -42,9 +43,9 @@ public class Rocket extends Visual {
 
         void update() {
             y += speed;
-            if (y > height + size) {
+            if (y > parent.height + 100) {
                 y = -size;
-                x = random(width);
+                x = random(parent.width);
             }
         }
 
@@ -66,9 +67,9 @@ public class Rocket extends Visual {
 
         void update() {
             position.y += speed;
-            if (position.y > height) {
+            if (position.y > parent.height) {
                 position.y = 0;
-                position.x = random(width);
+                position.x = random(parent.width);
             }
         }
 
@@ -78,29 +79,14 @@ public class Rocket extends Visual {
                 parent.ellipse(position.x, position.y - i * speed, 1, 1);
             }
         }
-    }
-
-    ArrayList<Star> stars = new ArrayList<>();
-    ArrayList<Planet> planets = new ArrayList<>();
-
-
-    public void settings() {
-        size(1024, 500, P3D);
-
-    }
-
-    
+    } 
 
     public void setup() {
-        colorMode(HSB, 255);
         
-        parent.noStroke();
         
+        drawStars(120);
+        createRandomPlanets(8);
 
-        // Call loadAudio to load an audio file to process
-        
-
-        createRandomPlanets(6);
         startTime = parent.millis();
     }
 
@@ -109,9 +95,11 @@ public class Rocket extends Visual {
 
     public void draw(PApplet parent) {
         
-    
-        drawStars(100, parent);
-    
+        if (!setupCalled) {
+            setup();
+            setupCalled = true;
+        }
+
         for (Star star : stars) {
             star.update();
             star.display();
@@ -137,7 +125,7 @@ public class Rocket extends Visual {
     }    
     
 
-    public void drawStars(int numStars, PApplet parent) {
+    public void drawStars(int numStars) {
         if (stars.size() < numStars) {
             for (int i = stars.size(); i < numStars; i++) {
                 float x = parent.random(parent.width);

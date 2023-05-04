@@ -8,6 +8,7 @@ public class Pulse extends Visual {
     
     // declare variables
     PApplet parent;
+    Visual pulse;
     float width, height;
     AudioBuffer ab;
     float smoothedAmplitude;

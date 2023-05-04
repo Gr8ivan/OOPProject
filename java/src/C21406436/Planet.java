@@ -28,7 +28,6 @@ public class Planet extends Visual {
     PImage starsTexture;
 
     // for use in pulse class
-    AudioBuffer ab = getAudioBuffer();
     float smoothedAmplitude = getSmoothedAmplitude();
 
     Rocket rocket;
@@ -48,6 +47,7 @@ public class Planet extends Visual {
         
         loadAudio("cantlie-slowed.mp3"); 
         rocket = new Rocket(this);   
+
         pulse = new Pulse(ab, smoothedAmplitude, this);      
         
         initializeStars();
