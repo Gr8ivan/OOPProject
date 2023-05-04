@@ -8,27 +8,27 @@ import processing.core.PVector;
 import processing.core.PGraphics;
 
 public class Planet extends Visual {
-    boolean started = false;
-    float planetSize = 100;
-    float smoothedBass = 0;
+    boolean started = false; // Flag to indicate if the visualization has started
+    float planetSize = 100; // Base size of the planet
+    float smoothedBass = 0; // Smoothed bass value for planet pulsing effect
     float smoothingFactor = 0.2f; // Adjust this value to control the smoothness (0 < smoothingFactor <= 1)
     float maxPulseSize = 0.4f; // Adjust this value to control the maximum increase in size due to pulsing
-    float starDistance =350;
-    int numStars = 200;
-    float[] starSizes;
-    float[] starSpeeds;
-    float[] starAngles;
-    float[] starDistances;
-    float[][] starPositions;
-    float angle = 0;
-    int numShockwaves = 10;
-    float shockwaveThickness = 3;
-    PShape starsSphere;
-    PImage starsTexture;
-
-    Rocket rocket;
+    float starDistance =350; // Distance of the stars from the center
+    int numStars = 200; // Number of stars to render
+    float[] starSizes; // Array to store star sizes
+    float[] starSpeeds; // Array to store star rotation speeds
+    float[] starAngles; // Array to store star angles
+    float[] starDistances; // Array to store star distances from the center
+    float[][] starPositions; // Array to store star positions
+    float angle = 0; // Angle to rotate the camera in the planet scene
+    int numShockwaves = 10; // Number of shockwaves to render
+    float shockwaveThickness = 3; // Thickness of the shockwaves
+    PShape starsSphere; // Shape object to hold the starry sphere
+    PImage starsTexture; // Image object to hold the texture for the starry sphere
     
+    Rocket rocket; // Rocket object for the rocket scene
 
+    
     public void settings() {
         size(1024, 500, P3D);
 
