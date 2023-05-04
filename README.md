@@ -6,8 +6,9 @@ Ivan Zenin - C21406436
 
 Eric O'Brien - C21750829
 
-
 Yasser Alshimmary - D21127124
+
+Daniel Phillips - C20421994
 
 
 # Description of the assignment
@@ -54,6 +55,22 @@ I worked on the Rocket.java in the project. My inspiration for this idea was old
 ### What I am most proud of in the assignment
 I'm mainly proud of the rocketship with the thruster behind it pulsating. It was a difficult but enjoyable experience but I was delighted how it turned out. It gave me a nostalgic feeling of a pixel art style ship. I'm also really proud of the teamwork that was done here and how all of our ideas came as one.
 
+## Daniel's Work
+I worked on the pulseStar.java class for our project. My idea was to create multiple planet (star) shaped objects that pulse to the music. I also wanted to have a waveform on the top and bottom of the screen that did the same. The class contains code to create lerpedBuffer variable and a smoothamplitude variable that make the waveform and circles behave less erratically. There is a loop to draw the waveforms and a loop to draw the circles.
+
+![Start](images/pulseStar.png)
+
+### How it works
+1) pulseStar class is defined. It extends Visual class.
+2) draw() function is called from Planet class switch statement.
+3) lerpedBuffer array is created to allow smoother waveform.
+4) smoothAmplitude variable is created to allow smoother circle expansion and compression.
+5) A loop creates the waveforms at the top and bottom of screen.
+6) Another loop creates three pulsing circular formations with the middle being the largest.
+
+### What I am most proud of in the assignment
+I am most proud of how my scene turned after struggling to figure it all out. My idea to do pulsing stars turned into me creating 3 circle formations that look like the base of speaker reacting to music. 
+
 ## Yasser's Work
 In the beginning, I start work on a scene to add it to our project, after that we face a problem, how can we switch between scenes, the planet scenes and rocket scenes. The goal was to allow users to transition between two classes, Rocket class and planet class, while the song is playing. The planet class is updated by add two function pressed function to use buttons to change between scene and add switch statement to make switch between scenes. also add Rocket object for the rocket scene. And update all functions in class to accept PApplet as parameter. The Rocket class updated to accept a 'PApplet' object as a parameter and updated all function in class to accept PApplet as parameter. 
 
@@ -77,81 +94,4 @@ In the beginning, I start work on a scene to add it to our project, after that w
 ### What I am most proud of in the assignment
 The good team work, especially when we had some major setbacks and how we worked though issues. Happy with the end result.
 
-## Name's Work
-
-### How it works
-
-### What I am most proud of in the assignment
-
 # Instructions
-
-# Bryan put this here to help us with the readme, I will delete this after everyone completed their bits.
-
-### Markdown Tutorial
-
-This is *emphasis*
-
-This is a bulleted list
-
-- Item
-- Item
-
-This is a numbered list
-
-1. Item
-1. Item
-
-This is a [hyperlink](http://bryanduggan.org)
-
-# Headings
-## Headings
-#### Headings
-##### Headings
-
-This is code:
-
-```Java
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-So is this without specifying the language:
-
-```
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-This is an image using a relative URL:
-
-![An image](images/p8.png)
-
-This is an image using an absolute URL:
-
-![A different image](https://bryanduggandotorg.files.wordpress.com/2019/02/infinite-forms-00045.png?w=595&h=&zoom=2)
-
-This is a youtube video:
-
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
-
-This is a table:
-
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-
