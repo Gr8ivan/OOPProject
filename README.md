@@ -6,8 +6,9 @@ Ivan Zenin - C21406436
 
 Eric O'Brien - C21750829
 
-
 Yasser Alshimmary - D21127124
+
+Daniel Phillips - C20421994
 
 
 # Description of the assignment
@@ -77,11 +78,21 @@ In the beginning, I start work on a scene to add it to our project, after that w
 ### What I am most proud of in the assignment
 The good team work, especially when we had some major setbacks and how we worked though issues. Happy with the end result.
 
-## Name's Work
+## Daniel's Work
+I worked on the pulseStar.java class for our project. My idea was to create multiple planet (star) shaped objects that pulse to the music. I also wanted to have a waveform on the top and bottom of the screen that did the same. The class contains code to create lerpedBuffer variable and a smoothamplitude variable that make the waveform and circles behave less erratically. There is a loop to draw the waveforms and a loop to draw the circles.
+
+![Start](images/pulseStar.png)
 
 ### How it works
+1) pulseStar class is defined. It extends Visual class.
+2) draw() function is called from Planet class switch statement.
+3) lerpedBuffer array is created to allow smoother waveform.
+4) smoothAmplitude variable is created to allow smoother circle expansion and compression.
+5) A loop creates the waveforms at the top and bottom of screen.
+6) Another loop creates three pulsing circular formations with the middle being the largest.
 
 ### What I am most proud of in the assignment
+I am most proud of how my scene turned after struggling to figure it all out. My idea to do pulsing stars turned into me creating 3 circle formations that look like the base of speaker reacting to music. 
 
 # Instructions
 
