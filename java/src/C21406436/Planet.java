@@ -43,7 +43,7 @@ public class Planet extends Visual {
         loadAudio("cantlie-slowed.mp3"); 
         rocket = new Rocket(this);      
 
-        
+
         
         
         initializeStars();
@@ -113,8 +113,6 @@ public class Planet extends Visual {
         translate(width / 2, height / 2);
     
         for (int i = 0; i < numStars; i++) {
-            float hueOffset = random(0, 255);
-            float hue = (40 + hueOffset) % 255;
             float angle = starAngles[i] + millis() * starSpeeds[i];
             float distance = starDistances[i];
             float targetX = distance * cos(angle);
