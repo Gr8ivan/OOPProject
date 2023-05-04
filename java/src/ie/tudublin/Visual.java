@@ -124,7 +124,6 @@ public abstract class Visual extends PApplet
 		return ai;
 	}
 
-
 	public AudioBuffer getAudioBuffer() {
 		return ab;
 	}

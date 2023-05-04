@@ -1,5 +1,6 @@
 package C21406436;
 import ddf.minim.AudioBuffer;
+import example.AudioBandsVisual;
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
 import processing.core.PApplet;
@@ -26,12 +27,11 @@ public class Planet extends Visual {
     float shockwaveThickness = 3;
     PShape starsSphere;
     PImage starsTexture;
-
-    // for use in pulse class
-    float smoothedAmplitude = getSmoothedAmplitude();
+    boolean setupCalled = false;
+    AudioBuffer ab = getAudioBuffer();
 
     Rocket rocket;
-    Pulse pulse;
+    PulseStar pulseStar;
     
 
     public void settings() {
@@ -46,9 +46,8 @@ public class Planet extends Visual {
         startMinim();
         
         loadAudio("cantlie-slowed.mp3"); 
-        rocket = new Rocket(this);   
-
-        pulse = new Pulse(ab, smoothedAmplitude, this);      
+        rocket = new Rocket(this);      
+        pulseStar = new PulseStar(this);
         
         initializeStars();
         starsTexture = createStarsTexture(2048, 2048, 1500);
@@ -90,6 +89,12 @@ public class Planet extends Visual {
 
     public void drawPlanet() {
         float bass = getSmoothedBands()[0] * maxPulseSize;
+        
+        if (getSmoothedBands() != null)
+        {
+            System.out.print(getSmoothedBands()[0]);
+            System.out.print("not null");
+        }
         smoothedBass = smoothingFactor * bass + (1 - smoothingFactor) * smoothedBass;
         float pulsingSize = planetSize + smoothedBass;
     
@@ -241,12 +246,19 @@ public class Planet extends Visual {
 
     
     public void draw() {
+
+        if (!setupCalled) {
+            setup();
+            setupCalled = true;
+        }
+            
+
         if (!started) {
-            background(0);
-            textAlign(CENTER, CENTER);
-            textSize(24);
-            fill(255);
-            text("Press Space to Start", width / 2, height / 2);
+        background(0);
+        textAlign(CENTER, CENTER);
+        textSize(24);
+        fill(255);
+        text("Press Space to Start", width / 2, height / 2);
         } else {
             if (musicStartTime != 0 && millis() - musicStartTime >= 2000 && !getAudioPlayer().isPlaying()) {
                 getAudioPlayer().cue(0);
@@ -282,8 +294,7 @@ public class Planet extends Visual {
                     rocket.draw(this);
                     break;
                 case 2:
-                    pulse.draw();
-                    break;
+                    pulseStar.draw(this);
             }
         }    
     }
