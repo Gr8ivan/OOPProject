@@ -1,53 +1,63 @@
 package C21406436;
 
 import ie.tudublin.Visual;
-import processing.core.PApplet;
+import processing.core.*;
 
-public class PulseStar extends Visual {
-    PApplet parent;
-    float angle = 0;
-    float starSize = 50;
+public class PulseStar
+{   
+    //declare variables
+    Planet pulse;
+    float cy = 0;
+    float[] lerpedBufferX;
+    int numStars = 8;
+    float smoothedAmplitude;
+    float amplitude;
 
-    public PulseStar(PApplet parent) {
-        this.parent = parent;
+    // constructor
+    public PulseStar(Planet pulse)
+    {
+        this.pulse = pulse;
+        cy = this.pulse.height / 2;
+        lerpedBufferX = new float[pulse.getAudioBuffer().size()];
     }
 
-    public void draw() {
-        float[] bands = getSmoothedBands();
-
-        // Draw waveforms at the 4 edges of the screen
-        parent.stroke(255);
-        parent.noFill();
-
-        for (int i = 0; i < bands.length; i++) {
-            // Top
-            parent.line(i * (parent.width / (float) bands.length), 0, i * (parent.width / (float) bands.length), bands[i]);
-            // Bottom
-            parent.line(i * (parent.width / (float) bands.length), parent.height, i * (parent.width / (float) bands.length), parent.height - bands[i]);
-            // Left
-            parent.line(0, i * (parent.height / (float) bands.length), bands[i], i * (parent.height / (float) bands.length));
-            // Right
-            parent.line(parent.width, i * (parent.height / (float) bands.length), parent.width - bands[i], i * (parent.height / (float) bands.length));
+    // draw method
+    public void draw()
+    {
+        for(int i = 0 ; i < pulse.getAudioBuffer().size() ; i ++)
+        {
+            lerpedBufferX[i] = PApplet.lerp(lerpedBufferX[i], pulse.getAudioBuffer().get(i), 0.02f);
         }
 
-        // Draw a pulsing, rotating star in the middle
-        parent.pushMatrix();
-        parent.translate(parent.width / 2, parent.height / 2);
-        parent.rotate(angle);
-        parent.fill(255);
-        parent.beginShape();
-        float pulsingSize = starSize + getAmplitude() * 200;
+        // calculate average and make smoothed amplitude variable
+        float total = 0;
+		for(int i = 0 ; i < pulse.getAudioBuffer().size() ; i ++)
+        {
+			total += PApplet.abs(pulse.getAudioBuffer().get(i));
+		}
+		amplitude = total / pulse.getAudioBuffer().size();
+		smoothedAmplitude = PApplet.lerp(smoothedAmplitude, amplitude, 0.1f);
 
-        for (int i = 0; i < 10; i++) {
-            float radius = (i % 2 == 0) ? pulsingSize : pulsingSize / 2;
-            float x = radius * PApplet.cos(PApplet.radians(i * 36));
-            float y = radius * PApplet.sin(PApplet.radians(i * 36));
-            parent.vertex(x, y);
+        // set colormode()
+        pulse.colorMode(PApplet.HSB);
+
+        // wave forms top and bottom of screen
+        for(int i = 0 ; i < pulse.getAudioBuffer().size() ; i ++)
+        {   
+            pulse.stroke(PApplet.map(i, 0, pulse.getAudioBuffer().size(), 0, 255), 255, 255);
+            float lbX = lerpedBufferX[i] * cy * 2;
+            pulse.line(i, 0, i, lbX);
+            pulse.line(i, pulse.height, i, pulse.height - lbX);
         }
 
-        parent.endShape(PApplet.CLOSE);
-        parent.popMatrix();
-
-        angle += 0.01;
+        // pulsating wave forms
+        for(int i = 0, col = 32; i < 8; i ++)
+        {
+            pulse.fill(0, 0);
+            pulse.stroke(31 + col * i + 1, 255, 255);
+            pulse.circle(pulse.width*0.85f, pulse.height/2, smoothedAmplitude * 75 * (i + 1));
+            pulse.circle(pulse.width/2, pulse.height/2, smoothedAmplitude * 150 * (i + i));
+            pulse.circle(pulse.width*0.15f, pulse.height/2, smoothedAmplitude * 75 * (i + 1));
+        }        
     }
 }

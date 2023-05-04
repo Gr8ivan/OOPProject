@@ -32,8 +32,8 @@ public class Planet extends Visual {
     PulseStar pulseStar;
     
     public void settings() {
-        size(1024, 500, P3D);
-
+        size(1920, 1080, P3D);
+        fullScreen(SPAN);
     }
 
 
@@ -242,7 +242,6 @@ public class Planet extends Visual {
         popMatrix();
     }
 
-    
     public void draw() {
          
         if (!started) {
@@ -290,6 +289,8 @@ public class Planet extends Visual {
                     rocket.draw(this);
                     break;
                 case 2:
+                    // Reset the camera to its default position for the pulseStar scene
+                    camera(width / 2.0f, height / 2.0f, (height / 2.0f) / tan(PI * 30.0f / 180.0f), width / 2.0f, height / 2.0f, 0, 0, 1, 0);
                     pulseStar.draw();
                     break;
             }
