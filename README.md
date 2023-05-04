@@ -41,7 +41,9 @@ Im most proud of the ability of all the methods working together to make such a 
 
 # Instructions
 
-# Markdown Tutorial
+# Bryan put this here to help us with the readme, I will delete this after everyone completed their bits.
+
+### Markdown Tutorial
 
 This is *emphasis*
 
