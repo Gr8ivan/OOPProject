@@ -43,6 +43,7 @@ public class Planet extends Visual {
         
         loadAudio("cantlie-slowed.mp3"); 
         rocket = new Rocket(this);      
+
         pulseStar = new PulseStar(this);
 
         // Initialize star arrays and generate star positions
@@ -53,11 +54,13 @@ public class Planet extends Visual {
     int mode = 0; // Mode variable to switch between scenes
 
     long musicStartTime = 0; // Variable to store the music start time
-
+    // Keypressed function to start the music and the scenes
     public void keyPressed() {
         if (key == ' ' && !started) {
             started = true; // Set started flag to true
             musicStartTime = millis(); // Store music start time
+
+        // switch between scenes by press numbers
         } else if (key >= '0' && key <= '9') {
             mode = key - '0';
         }
@@ -243,7 +246,6 @@ public class Planet extends Visual {
     }
 
     public void draw() {
-         
         if (!started) {
             // Display the "Press Space to Start" message before starting
             background(0);
@@ -286,6 +288,7 @@ public class Planet extends Visual {
                 case 1:
                     // Reset the camera to its default position for the rocket scene
                     camera(width / 2.0f, height / 2.0f, (height / 2.0f) / tan(PI * 30.0f / 180.0f), width / 2.0f, height / 2.0f, 0, 0, 1, 0);
+                    // run draw function from  rocket call
                     rocket.draw(this);
                     break;
                 case 2:

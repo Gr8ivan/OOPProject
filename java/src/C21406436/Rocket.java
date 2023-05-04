@@ -27,6 +27,7 @@ public class Rocket extends Visual {
     float planetSpeed = 0.2f;
     int startTime;
 
+    // Add PApplet parent
     PApplet parent;
     boolean setupCalled = false;
 
@@ -34,7 +35,7 @@ public class Rocket extends Visual {
     ArrayList<RocketStar> stars = new ArrayList<>();
     ArrayList<RocketPlanet> planets = new ArrayList<>();
 
-    // Constructor
+    // rocket Constructor for PApplet parent
     public Rocket(PApplet parent) {
         this.parent = parent;
     }
