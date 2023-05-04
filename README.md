@@ -57,22 +57,25 @@ I'm mainly proud of the rocketship with the thruster behind it pulsating. It was
 ## Yasser's Work
 In the beginning, I start work on a scene to add it to our project, after that we face a problem, how can we switch between scenes, the planet scenes and rocket scenes. The goal was to allow users to transition between two classes, Rocket class and planet class, while the song is playing. The planet class is updated by add two function pressed function to use buttons to change between scene and add switch statement to make switch between scenes. also add Rocket object for the rocket scene. And update all functions in class to accept PApplet as parameter. The Rocket class updated to accept a 'PApplet' object as a parameter and updated all function in class to accept PApplet as parameter. 
 
-### How it works
-_ Add pressed function, to start the project by pressed shift, and switch between class. 
-_ Add switch statement to switch between scenes.
-_Update Visual class by add PApplet parent.
+![Start](images/start.png)
 
-_ Update Planet class:
-	1. Add Rocket object for the rocket scene.
-	2.Update parameters in both drawShockwaves()  and draw() to accept 	PApplet.
-_ Update Rocket:
-	1. Add PApplet project
-	2. Add Rocket  Constructor to accept PApplet parent
-	3.update display(), draw(), drawStars(), and drawRocket(  		functions to accept PApplet parent, also update parameters in each 		functions
+### How it works
+1. Add pressed function, to start the project by pressed shift, and switch between class. 
+1. Add switch statement to switch between scenes.
+1. Update Visual class by add PApplet parent.
+
+1. Update Planet class:
+- Add Rocket object for the rocket scene.
+- Update parameters in both drawShockwaves()  and draw() to accept 	PApplet.
+
+5. Update Rocket:
+- Add PApplet project
+- Add Rocket  Constructor to accept PApplet parent
+- update display(), draw(), drawStars(), and drawRocket() 		functions to accept PApplet parent, also update parameters in each 		functions
 
 
 ### What I am most proud of in the assignment
-The good team work, especially when we lost some code accidentally, and rest the GitHub Repo, the end results of our work and project.  
+The good team work, especially when we had some major setbacks and how we worked though issues. Happy with the end result.
 
 ## Name's Work
 
