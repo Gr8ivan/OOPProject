@@ -1,4 +1,6 @@
 package C21406436;
+import ddf.minim.AudioBuffer;
+import example.AudioBandsVisual;
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
 import processing.core.PApplet;
@@ -27,11 +29,11 @@ public class Planet extends Visual {
     PImage starsTexture; // Image object to hold the texture for the starry sphere
     
     Rocket rocket; // Rocket object for the rocket scene
-
+    PulseStar pulseStar;
     
     public void settings() {
-        size(1024, 500, P3D);
-
+        size(1920, 1080, P3D);
+        fullScreen(SPAN);
     }
 
 
@@ -41,6 +43,9 @@ public class Planet extends Visual {
         
         loadAudio("cantlie-slowed.mp3"); 
         rocket = new Rocket(this);      
+
+        pulseStar = new PulseStar(this);
+
         // Initialize star arrays and generate star positions
         initializeStars();
         starsTexture = createStarsTexture(2048, 2048, 1500); // Create the texture for the starry sphere
@@ -88,6 +93,7 @@ public class Planet extends Visual {
     public void drawPlanet() {
         // Calculate pulsing size based on smoothed bass
         float bass = getSmoothedBands()[0] * maxPulseSize;
+        
         smoothedBass = smoothingFactor * bass + (1 - smoothingFactor) * smoothedBass;
         float pulsingSize = planetSize + smoothedBass;
     
@@ -239,15 +245,13 @@ public class Planet extends Visual {
         popMatrix();
     }
 
-    
     public void draw() {
-        if (!started) {            
+        if (!started) {
+            // Display the "Press Space to Start" message before starting
             background(0);
             textAlign(CENTER, CENTER);
             textSize(24);
             fill(255);
-
-            // Display the "Press Space to Start" message before starting
             text("Press Space to Start", width / 2, height / 2);
         } else {
             // Play the audio after a 2-second delay
@@ -288,9 +292,9 @@ public class Planet extends Visual {
                     rocket.draw(this);
                     break;
                 case 2:
-                    // Reset the camera to its default position for the rocket scene
+                    // Reset the camera to its default position for the pulseStar scene
                     camera(width / 2.0f, height / 2.0f, (height / 2.0f) / tan(PI * 30.0f / 180.0f), width / 2.0f, height / 2.0f, 0, 0, 1, 0);
-                    //rocket.draw(this);
+                    pulseStar.draw();
                     break;
             }
         }    
